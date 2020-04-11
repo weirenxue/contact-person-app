@@ -29,12 +29,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case 1:
                         try {
                             int num = 0;
+                            int id = 0;
                             LinearLayout container = (LinearLayout) findViewById(R.id.container);
                             JSONObject jsonObject = (JSONObject)msg.obj;
                             System.out.println("in handler "+ jsonObject.getJSONArray("records").length());
                             num = jsonObject.getJSONArray("records").length();
                             for (int i = 0; i < num; i++) {
                                 //新增聯絡人的按扭
+                                id = (int)jsonObject.getJSONArray("records").getJSONObject(i).get("id");
+                                System.out.println();
+
                                 Button add_user = (Button) findViewById(R.id.add_contact);
                                 add_user.setOnClickListener(MainActivity.this);
                                 //新LinearLayout,每個聯絡人一個
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 bn_delete.setText(R.string.button_delete);
                                 bn_delete.setGravity(Gravity.CENTER);
                                 contact.addView(bn_delete);
+                                bn_delete.setId(id);
                                 bn_delete.setOnClickListener(MainActivity.this);
                             }
                         } catch (JSONException e) {
@@ -147,7 +152,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        ((Button) v).setText("");
+        ((Button) v).getText();
+        int id = ((Button) v).getId();
+        System.out.println(id + ((Button) v).getText().toString());
     }
 
 }
