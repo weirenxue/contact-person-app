@@ -35,20 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             num = jsonObject.getJSONArray("records").length();
                             for (int i = 0; i < num; i++) {
                                 //新增聯絡人的按扭
-                                /*Button add_user = (Button) findViewById(R.id.add_contact);
-                                add_user.setOnClickListener(new Button.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                    }
-                                });*/
+                                Button add_user = (Button) findViewById(R.id.add_contact);
+                                add_user.setOnClickListener(MainActivity.this);
                                 //新LinearLayout,每個聯絡人一個
-                                LinearLayout contact = new LinearLayout(getApplicationContext());
+                                LinearLayout contact = new LinearLayout(MainActivity.this);
                                 contact.setOrientation(LinearLayout.HORIZONTAL);
                                 contact.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                                 container.addView(contact);
 
                                 //放名字的TextView
-                                TextView tv_name = new TextView(getApplicationContext());
+                                TextView tv_name = new TextView(MainActivity.this);
                                 tv_name.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
                                 tv_name.setText(jsonObject.getJSONArray("records").getJSONObject(i).get("name").toString());
                                 tv_name.setTextSize(20);
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 contact.addView(tv_name);
 
                                 //放手機的TextView
-                                TextView tv_phone = new TextView(getApplicationContext());
+                                TextView tv_phone = new TextView(MainActivity.this);
                                 tv_phone.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 3));
                                 tv_phone.setText(jsonObject.getJSONArray("records").getJSONObject(i).get("phone").toString());
                                 tv_phone.setTextSize(20);
@@ -64,17 +60,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 contact.addView(tv_phone);
 
                                 //更新的按扭
-                                Button bn_update = new Button(getApplicationContext());
+                                Button bn_update = new Button(MainActivity.this);
                                 bn_update.setText(R.string.button_update);
-                                //bn_update.setOnClickListener(getApplicationContext());
+                                bn_update.setOnClickListener(MainActivity.this);
                                 contact.addView(bn_update);
 
                                 //刪除的按扭
-                                Button bn_delete = new Button(getApplicationContext());
+                                Button bn_delete = new Button(MainActivity.this);
                                 bn_delete.setText(R.string.button_delete);
                                 bn_delete.setGravity(Gravity.CENTER);
                                 contact.addView(bn_delete);
-                                //bn_delete.setOnClickListener(getApplicationContext());
+                                bn_delete.setOnClickListener(MainActivity.this);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
