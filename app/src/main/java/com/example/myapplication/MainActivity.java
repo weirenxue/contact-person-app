@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Button bn_update = new Button(MainActivity.this);
                                 bn_update.setText(R.string.button_update);
                                 bn_update.setOnClickListener(MainActivity.this);
+                                bn_update.setId(id);
                                 contact.addView(bn_update);
 
                                 //刪除的按扭
@@ -99,50 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // query
                     msg.what = 1;
                     mHandler.sendMessage(msg);
-                    /*num = jsonObject.getJSONArray("records").length();
-                    for (int i = 0; i < num; i++) {
-                        //新增聯絡人的按扭
-                        Button add_user = (Button) findViewById(R.id.add_contact);
-                        add_user.setOnClickListener(new Button.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                            }
-                        });
-                        //新LinearLayout,每個聯絡人一個
-                        LinearLayout contact = new LinearLayout(getApplicationContext());
-                        contact.setOrientation(LinearLayout.HORIZONTAL);
-                        contact.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        container.addView(contact);
-
-                        //放名字的TextView
-                        TextView tv_name = new TextView(getApplicationContext());
-                        tv_name.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-                        tv_name.setText(jsonObject.getJSONArray("records").getJSONObject(i).get("name").toString());
-                        tv_name.setTextSize(20);
-                        tv_name.setGravity(Gravity.LEFT);
-                        contact.addView(tv_name);
-
-                        //放手機的TextView
-                        TextView tv_phone = new TextView(getApplicationContext());
-                        tv_phone.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 3));
-                        tv_phone.setText(jsonObject.getJSONArray("records").getJSONObject(i).get("phone").toString());
-                        tv_phone.setTextSize(20);
-                        tv_phone.setGravity(Gravity.CENTER);
-                        contact.addView(tv_phone);
-
-                        //更新的按扭
-                        Button bn_update = new Button();
-                        bn_update.setText(R.string.button_update);
-                        //bn_update.setOnClickListener(getApplicationContext());
-                        contact.addView(bn_update);
-
-                        //刪除的按扭
-                        /*Button bn_delete = new Button(getApplicationContext());
-                        bn_delete.setText(R.string.button_delete);
-                        bn_delete.setGravity(Gravity.CENTER);
-                        contact.addView(bn_delete);
-                        //bn_delete.setOnClickListener(getApplicationContext());
-                    }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -152,9 +109,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        ((Button) v).getText();
-        int id = ((Button) v).getId();
-        System.out.println(id + ((Button) v).getText().toString());
+        Button bn = ((Button) v);
+        int bn_id = bn.getId();
+        String bn_text = bn.getText().toString();
+        String deleteText = getResources().getString(R.string.button_delete);
+        String updateText = getResources().getString(R.string.button_update);
+        if (bn_id == R.id.add_contact){
+            System.out.println("this is ADD " );
+        } else if (bn_text.equals(deleteText))
+        {
+            System.out.println("this is DELETE " + bn_id);
+        } else if (bn_text.equals(updateText))
+        {
+            System.out.println("this is UPDATE " + bn_id);
+        }
     }
 
 }
