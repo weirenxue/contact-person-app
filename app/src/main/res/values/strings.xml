@@ -7,6 +7,7 @@
     <string name="textview_phone">電話：</string>
     <string name="prompt_delete">確定要刪除？</string>
     <string name="prompt_update">確定要修改？</string>
+    <string name="prompt_addone">新增一個使用者</string>
     <string name="button_confirm">Confirm</string>
     <string name="button_cancel">Cancel</string>
 </resources>

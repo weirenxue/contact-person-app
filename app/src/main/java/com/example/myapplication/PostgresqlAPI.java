@@ -27,7 +27,7 @@ public class PostgresqlAPI {
      *
      */
     public PostgresqlAPI(){
-        apiUrl = "http://192.168.0.13/api/user/";
+        apiUrl = "http://192.168.50.105/api/user/";
         createPhp = "create.php";
         readPhp = "read.php";
         updatePhp = "update.php";

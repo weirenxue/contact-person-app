@@ -154,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     //insert
                     case 3:
+                        Intent addoneIntent = new Intent();
+                        addoneIntent.setClass(MainActivity.this, AddOneActivity.class);
+                        startActivity(addoneIntent);
+                        MainActivity.this.finish();
                         break;
                 }
             }

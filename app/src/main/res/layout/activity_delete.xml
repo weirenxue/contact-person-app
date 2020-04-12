@@ -70,7 +70,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
-        android:text="phone"
+        android:text="Phone"
         app:layout_constraintEnd_toEndOf="@+id/delete_name"
         app:layout_constraintTop_toBottomOf="@+id/delete_name" />
 
