@@ -3,6 +3,9 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,8 +13,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null && bundle.containsKey("msg")) {
+            Toast.makeText(this, bundle.getString("msg"), Toast.LENGTH_LONG).show();
+            System.out.println("yes!");
+        }
+
         final Handler mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -85,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-        new Thread(new Runnable(){
+        Thread th = new Thread(new Runnable(){
             @Override
             public void run() {
                 Message msg = new Message();
@@ -104,25 +116,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+        th.start();
 
     }
     @Override
     public void onClick(View v) {
         Button bn = ((Button) v);
-        int bn_id = bn.getId();
+        final int bn_id = bn.getId();
         String bn_text = bn.getText().toString();
         String deleteText = getResources().getString(R.string.button_delete);
         String updateText = getResources().getString(R.string.button_update);
+        final Handler mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                JSONObject jsonObject = (JSONObject) msg.obj;
+                switch(msg.what) {
+                    // delete
+                    case 1:
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this  , DeleteActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("json", jsonObject.toString());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            MainActivity.this.finish();
+                        break;
+                    //update
+                    case 2:
+                        break;
+                    //insert
+                    case 3:
+                        break;
+                }
+            }
+        };
+
         if (bn_id == R.id.add_contact){
             System.out.println("this is ADD " );
+            Thread th = new Thread(new TransactionRun(3, mHandler, bn_id));
+            th.start();
         } else if (bn_text.equals(deleteText))
         {
+            Thread th = new Thread(new TransactionRun(1, mHandler, bn_id));
+            th.start();
             System.out.println("this is DELETE " + bn_id);
+
         } else if (bn_text.equals(updateText))
         {
+            Thread th = new Thread(new TransactionRun(2, mHandler, bn_id));
+            th.start();
             System.out.println("this is UPDATE " + bn_id);
         }
+
     }
 
 }

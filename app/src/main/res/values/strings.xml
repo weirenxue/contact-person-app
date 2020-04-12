@@ -3,4 +3,9 @@
     <string name="button_delete">Delete</string>
     <string name="button_update">Modify</string>
     <string name="button_insert">ADD ONE</string>
+    <string name="textview_name">名字：</string>
+    <string name="textview_phone">電話：</string>
+    <string name="prompt_delete">確定要刪除？</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="button_cancel">Cancel</string>
 </resources>
