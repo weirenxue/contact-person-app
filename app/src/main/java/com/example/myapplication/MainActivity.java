@@ -134,16 +134,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(msg.what) {
                     // delete
                     case 1:
-                            Intent intent = new Intent();
-                            intent.setClass(MainActivity.this  , DeleteActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("json", jsonObject.toString());
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            MainActivity.this.finish();
+                        Intent deleteIntent = new Intent();
+                        deleteIntent.setClass(MainActivity.this  , DeleteActivity.class);
+                        Bundle deleteBundle = new Bundle();
+                        deleteBundle.putString("json", jsonObject.toString());
+                        deleteIntent.putExtras(deleteBundle);
+                        startActivity(deleteIntent);
+                        MainActivity.this.finish();
                         break;
                     //update
                     case 2:
+                        Intent updateIntent = new Intent();
+                        updateIntent.setClass(MainActivity.this, UpdateActivity.class);
+                        Bundle updateBundle = new Bundle();
+                        updateBundle.putString("json", jsonObject.toString());
+                        updateIntent.putExtras(updateBundle);
+                        startActivity(updateIntent);
+                        MainActivity.this.finish();
                         break;
                     //insert
                     case 3:

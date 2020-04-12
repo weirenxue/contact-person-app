@@ -53,7 +53,7 @@ public class DeleteActivity extends AppCompatActivity implements View.OnClickLis
                    bundle.putString("msg", "刪除失敗!");
                intent.putExtras(bundle);
                startActivity(intent);
-                DeleteActivity.this.finish();
+               DeleteActivity.this.finish();
             }
         };
         if (bn.getId() == R.id.button_delete)
